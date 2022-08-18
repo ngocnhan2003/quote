@@ -1,4 +1,4 @@
-name: README
+name: QUOTE
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   update-readme:
-    name: Update Readme with Metrics
+    name: Update Quote
     runs-on: ubuntu-latest
     permissions: read-all
     steps:

@@ -1,0 +1,30 @@
+name: README
+
+on:
+  schedule:
+    - cron: '5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    name: Update Readme with Metrics
+    runs-on: ubuntu-latest
+    permissions: read-all
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+      - name: Install dependencies
+        run: |
+          python3.9 -m pip install --upgrade pip
+          python3.9 -m pip install -r requirements.txt
+      - name: Update Quote
+        env:
+          INPUT_REPOSITORY: "ngocnhan2003"
+          INPUT_GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+          INPUT_COMMIT_MESSAGE: "quote sync"
+          INPUT_OPTION: "both"
+        run: |
+          python main.py

@@ -22,7 +22,7 @@ jobs:
           python3.9 -m pip install -r requirements.txt
       - name: Update Quote
         env:
-          INPUT_REPOSITORY: "ngocnhan2003"
+          INPUT_REPOSITORY: "ngocnhan2003/ngocnhan2003"
           INPUT_GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           INPUT_COMMIT_MESSAGE: "quote sync"
           INPUT_OPTION: "both"

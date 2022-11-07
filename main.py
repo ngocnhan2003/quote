@@ -121,7 +121,10 @@ if __name__ == "__main__":
         
     if datetime.today().weekday() == 0:
         quote_repo = g.get_repo("ngocnhan2003/quote")
+        new_content = f"# Update Quote [{str(datetime.today().date())}]"
         readme_obj = quote_repo.get_readme()
-        quote_repo.update_file(path=readme_obj.path, message="Touch", content=f"# Update Quote [{str(datetime.today().date())}]", sha=readme_obj.sha)
+        readme_content = str(base64.b64decode(readme_obj.content), "utf-8")
+        if readme_content != new_content:
+            quote_repo.update_file(path=readme_obj.path, message="Touch", content=new_content, sha=readme_obj.sha)
         
         

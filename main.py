@@ -8,6 +8,7 @@ import re
 import sys
 import random
 import base64
+from datetime import datetime
 from typing import List
 from github import Github, GithubException
 
@@ -113,8 +114,14 @@ if __name__ == "__main__":
     readme_content_decoded = decode_readme(readme_content)
     new_readme = generate_new_readme(readme=readme_content_decoded, i_tag=text_to_display)
     if readme_content_decoded != new_readme:
-        readme_repo.update_file(path=readme_obj.path, message=COMMIT_MSG,
-                             content=new_readme, sha=readme_obj.sha)
+        readme_repo.update_file(path=readme_obj.path, message=COMMIT_MSG, content=new_readme, sha=readme_obj.sha)
         print("Success")
     else:
         print('No change')
+        
+    if datetime.today().weekday() == 0:
+        quote_repo = g.get_repo("ngocnhan2003/quote")
+        readme_obj = quote_repo.get_readme()
+        quote_repo.update_file(path=readme_obj.path, message="Touch", content=f"# Update Quote [{str(datetime.today().date())}]", sha=readme_obj.sha)
+        
+        
